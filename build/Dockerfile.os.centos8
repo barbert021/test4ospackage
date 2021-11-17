@@ -10,7 +10,7 @@ RUN ARCH=$(uname -m) \
 
 WORKDIR /centos/$OS_VERSION/os
 COPY packages.yaml .
-COPY --from=mikefarah/yq:4.11.1 /usr/bin/yq /usr/bin/yq
+COPY --from=mikefarah/yq:4.14.2 /usr/bin/yq /usr/bin/yq
 RUN yq eval '.common[],.yum[],.centos8[],.kubespray.common[],.kubespray.yum[]' packages.yaml > packages.list
 
 RUN ARCH=$(uname -m) \

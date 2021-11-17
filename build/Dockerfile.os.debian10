@@ -13,8 +13,7 @@ RUN ARCH=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/') \
 WORKDIR /debian/${TARGETARCH}
 COPY packages.yaml .
 
-COPY --from=mikefarah/yq:4.11.1 /usr/bin/yq /usr/bin/yq
-COPY --from=mikefarah/yq:4.11.1 /usr/bin/yq /usr/bin/yq
+COPY --from=mikefarah/yq:4.14.2 /usr/bin/yq /usr/bin/yq
 RUN yq eval '.common[],.apt[],.kubespray.common[],.kubespray.apt[],.debian10[]' packages.yaml > packages.list \
     && dpkg --get-selections | grep -v deinstall | cut -f1 | cut -d ':' -f1 >> packages.list \
     && sort -u packages.list | xargs apt-get install --reinstall --print-uris | awk -F "'" '{print $2}' | grep -v '^$' | sort -u > packages.urls

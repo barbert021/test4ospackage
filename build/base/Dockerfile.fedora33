@@ -8,4 +8,4 @@ RUN dnf install -q -y ${BUILD_TOOLS} \
     && dnf makecache -q
 
 WORKDIR /fedora/$OS_VERSION/os
-COPY --from=mikefarah/yq:4.11.1 /usr/bin/yq /usr/bin/yq
+COPY --from=mikefarah/yq:4.14.2 /usr/bin/yq /usr/bin/yq
